@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <view
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/genreList"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/filmTextView"
-        app:layout_constraintTop_toBottomOf="@id/genreTextView" />
+        app:layout_constraintTop_toBottomOf="@id/genreTextView"
+        />
 
     <TextView
         android:id="@+id/filmTextView"
@@ -32,13 +32,15 @@
         app:layout_constraintBottom_toTopOf="@id/filmList"
         app:layout_constraintTop_toBottomOf="@id/genreList" />
 
-    <view
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filmList"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filmTextView"
-        tools:listitem="@layout/film_item" />
+        tools:listitem="@layout/film_item"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+      />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
