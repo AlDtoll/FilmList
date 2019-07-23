@@ -88,7 +88,7 @@ public class Presenter implements Serializable {
 
     private void initRecyclersView() {
         RecyclerView filmList = activity.findViewById(R.id.filmList);
-        FilmAdapter filmAdapter = new FilmAdapter(films, filmCallback);
+        FilmAdapter filmAdapter = new FilmAdapter(films, filmCallback, activity);
         filmList.setAdapter(filmAdapter);
 
         RecyclerView genreList = activity.findViewById(R.id.genreList);

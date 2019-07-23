@@ -1,5 +1,6 @@
 package com.example.filmlist.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmlist.R;
 import com.example.filmlist.model.Film;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -18,10 +20,12 @@ public class FilmAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<Film> films;
     private Callback callback;
+    private Context context;
 
-    public FilmAdapter(ArrayList<Film> films, Callback callback) {
+    public FilmAdapter(ArrayList<Film> films, Callback callback, Context context) {
         this.callback = callback;
         this.films = films;
+        this.context = context;
     }
 
     @NonNull
@@ -43,7 +47,9 @@ public class FilmAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 callback.selectFilm(film);
             }
         }));
-//        filmHolder.poster.setImageResource(R.drawable.ic_launcher_foreground);
+        Picasso.with(context)
+                .load(film.getImage_url())
+                .into(filmHolder.poster);
     }
 
     @Override
