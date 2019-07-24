@@ -3,11 +3,11 @@ package com.example.filmlist.presenter;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmlist.FilmFragment;
+import com.example.filmlist.ListFragment;
 import com.example.filmlist.MainActivity;
 import com.example.filmlist.R;
 import com.example.filmlist.adapter.FilmAdapter;
@@ -23,6 +23,8 @@ import java.util.Arrays;
 public class Presenter implements Serializable {
 
     private MainActivity activity;
+    private ListFragment listFragment;
+    private FilmFragment filmFragment;
 
     private boolean isActive = true;
     private ArrayList<Film> films = new ArrayList<>();
@@ -50,7 +52,7 @@ public class Presenter implements Serializable {
 
     public void setFilms(ArrayList<Film> films) {
         this.films = films;
-        initRecyclersView();
+        listFragment.initRecyclersView();
     }
 
     public ArrayList<Film> getFilms() {
@@ -59,54 +61,39 @@ public class Presenter implements Serializable {
 
     public void onStart() {
         isActive = true;
+        createFragments();
+        showFragment(listFragment);
     }
 
-    private FilmAdapter.Callback filmCallback = new FilmAdapter.Callback() {
-        @Override
-        public void selectFilm(Film film) {
-            selectedFilm = film;
-            showFragment();
-        }
-    };
-
-    private void showFragment() {
+    private void createFragments() {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstantEnum.PRESENTER.getCode(), this);
-        FilmFragment filmFragment = new FilmFragment();
+        listFragment = new ListFragment();
+        listFragment.setArguments(bundle);
+        filmFragment = new FilmFragment();
         filmFragment.setArguments(bundle);
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        fragmentManager.popBackStack();
-        fragmentManager.beginTransaction().replace(R.id.container, filmFragment).commit();
     }
 
-    private GenreAdapter.Callback genreCallback = new GenreAdapter.Callback() {
-        @Override
-        public void selectGenre(String film) {
-
-        }
-    };
-
-    private void initRecyclersView() {
-        RecyclerView filmList = activity.findViewById(R.id.filmList);
-        FilmAdapter filmAdapter = new FilmAdapter(films, filmCallback, activity);
-        filmList.setAdapter(filmAdapter);
-
-        RecyclerView genreList = activity.findViewById(R.id.genreList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
-        genreList.setLayoutManager(linearLayoutManager);
-        GenreAdapter genreAdapter = new GenreAdapter(getGenres(), genreCallback);
-        genreList.setAdapter(genreAdapter);
+    private void showFragment(Fragment fragment) {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        fragmentManager.popBackStack();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     public void onStop() {
 
     }
 
-    private ArrayList<String> getGenres() {
-        return new ArrayList<>(Arrays.asList(films.get(0).getGenres()));
+    public ArrayList<String> getGenres() {
+        return new ArrayList<>(Arrays.asList("Pfukeirf"));
     }
 
     public Film getSelectedFilm() {
         return selectedFilm;
+    }
+
+    public void selectFilm(Film film) {
+        selectedFilm = film;
+        showFragment(filmFragment);
     }
 }

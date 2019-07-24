@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmlist.R;
-import com.example.filmlist.model.Film;
 
 import java.util.ArrayList;
 

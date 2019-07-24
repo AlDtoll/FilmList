@@ -14,10 +14,13 @@ import androidx.fragment.app.Fragment;
 import com.example.filmlist.common.ConstantEnum;
 import com.example.filmlist.model.Film;
 import com.example.filmlist.presenter.Presenter;
+import com.squareup.picasso.Picasso;
+
+import java.util.Arrays;
 
 public class FilmFragment extends Fragment {
 
-    Presenter presenter;
+    private Presenter presenter;
 
     @Nullable
     @Override
@@ -26,8 +29,17 @@ public class FilmFragment extends Fragment {
         View fragment = inflater.inflate(R.layout.fragment_film, container, false);
         Film selectedFilm = presenter.getSelectedFilm();
         ImageView poster = fragment.findViewById(R.id.poster);
+        Picasso.with(getContext())
+                .load(selectedFilm.getImage_url())
+                .into(poster);
         TextView title = fragment.findViewById(R.id.title);
         title.setText(selectedFilm.getLocalized_name());
+        TextView description = fragment.findViewById(R.id.description);
+        description.setText(selectedFilm.getDescription());
+        TextView rating = fragment.findViewById(R.id.rating);
+        rating.setText(String.valueOf(selectedFilm.getRating()));
+//        TextView year = fragment.findViewById(R.id.year);
+//        year.setText(selectedFilm.getYear());
 
         return fragment;
     }
