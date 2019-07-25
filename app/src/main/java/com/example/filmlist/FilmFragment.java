@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.filmlist.common.ConstantEnum;
@@ -39,6 +40,9 @@ public class FilmFragment extends Fragment {
         rating.setText(String.valueOf(selectedFilm.getRating()));
         TextView year = fragment.findViewById(R.id.year);
         year.setText(String.valueOf(selectedFilm.getYear()));
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActivity().setTitle(selectedFilm.getLocalized_name());
 
         return fragment;
     }

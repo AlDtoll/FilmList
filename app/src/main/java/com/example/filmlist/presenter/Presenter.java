@@ -76,7 +76,7 @@ public class Presenter implements Serializable {
     private void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.container, fragment);
-        if(fragment instanceof FilmFragment){
+        if (fragment instanceof FilmFragment) {
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();
@@ -97,5 +97,11 @@ public class Presenter implements Serializable {
     public void selectFilm(Film film) {
         selectedFilm = film;
         showFragment(filmFragment);
+    }
+
+    public void onBackPressed() {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        fragmentManager.popBackStack();
+        showFragment(listFragment);
     }
 }

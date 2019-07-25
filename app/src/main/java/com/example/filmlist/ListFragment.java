@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,8 @@ public class ListFragment extends Fragment {
         presenter = (Presenter) getArguments().getSerializable(ConstantEnum.PRESENTER.getCode());
         fragment = inflater.inflate(R.layout.fragment_list, container, false);
         initRecyclersView();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getActivity().setTitle("Фильмы");
         return fragment;
     }
 
