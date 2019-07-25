@@ -5,13 +5,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.filmlist.FilmFragment;
 import com.example.filmlist.ListFragment;
 import com.example.filmlist.MainActivity;
 import com.example.filmlist.R;
-import com.example.filmlist.adapter.FilmAdapter;
-import com.example.filmlist.adapter.GenreAdapter;
 import com.example.filmlist.common.ConstantEnum;
 import com.example.filmlist.model.Film;
 import com.example.filmlist.task.GetFilmsListTask;
@@ -76,8 +75,11 @@ public class Presenter implements Serializable {
 
     private void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        fragmentManager.popBackStack();
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.container, fragment);
+        if(fragment instanceof FilmFragment){
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
     }
 
     public void onStop() {

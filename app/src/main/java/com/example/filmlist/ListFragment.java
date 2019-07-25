@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +17,6 @@ import com.example.filmlist.common.ConstantEnum;
 import com.example.filmlist.model.Film;
 import com.example.filmlist.presenter.Presenter;
 
-import java.util.ArrayList;
-
 public class ListFragment extends Fragment {
 
     private Presenter presenter;
@@ -30,7 +27,7 @@ public class ListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         presenter = (Presenter) getArguments().getSerializable(ConstantEnum.PRESENTER.getCode());
         fragment = inflater.inflate(R.layout.fragment_list, container, false);
-//        initRecyclersView();
+        initRecyclersView();
         return fragment;
     }
 

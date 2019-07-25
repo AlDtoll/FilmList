@@ -16,8 +16,6 @@ import com.example.filmlist.model.Film;
 import com.example.filmlist.presenter.Presenter;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
-
 public class FilmFragment extends Fragment {
 
     private Presenter presenter;
@@ -31,6 +29,7 @@ public class FilmFragment extends Fragment {
         ImageView poster = fragment.findViewById(R.id.poster);
         Picasso.with(getContext())
                 .load(selectedFilm.getImage_url())
+                .placeholder(R.drawable.placeholder)
                 .into(poster);
         TextView title = fragment.findViewById(R.id.title);
         title.setText(selectedFilm.getLocalized_name());
@@ -38,8 +37,8 @@ public class FilmFragment extends Fragment {
         description.setText(selectedFilm.getDescription());
         TextView rating = fragment.findViewById(R.id.rating);
         rating.setText(String.valueOf(selectedFilm.getRating()));
-//        TextView year = fragment.findViewById(R.id.year);
-//        year.setText(selectedFilm.getYear());
+        TextView year = fragment.findViewById(R.id.year);
+        year.setText(String.valueOf(selectedFilm.getYear()));
 
         return fragment;
     }

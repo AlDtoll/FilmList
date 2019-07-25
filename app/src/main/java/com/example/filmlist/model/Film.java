@@ -1,6 +1,8 @@
 package com.example.filmlist.model;
 
-public class Film {
+import java.io.Serializable;
+
+public class Film implements Serializable {
 
     private int id;
     private String localized_name;

@@ -49,6 +49,7 @@ public class FilmAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }));
         Picasso.with(context)
                 .load(film.getImage_url())
+                .placeholder(R.drawable.placeholder)
                 .into(filmHolder.poster);
     }
 
