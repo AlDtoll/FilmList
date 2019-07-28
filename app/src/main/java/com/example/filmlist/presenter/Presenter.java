@@ -17,7 +17,6 @@ import com.example.filmlist.task.GetFilmsListTask;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Presenter implements Serializable {
 
@@ -27,6 +26,7 @@ public class Presenter implements Serializable {
 
     private boolean isActive = true;
     private ArrayList<Film> films = new ArrayList<>();
+    private ArrayList<Film> filteredFilms = new ArrayList<>();
     private Film selectedFilm = new Film();
 
     public Presenter(MainActivity activity) {
@@ -51,11 +51,12 @@ public class Presenter implements Serializable {
 
     public void setFilms(ArrayList<Film> films) {
         this.films = films;
+        filteredFilms = new ArrayList<>(films);
         listFragment.initRecyclersView();
     }
 
     public ArrayList<Film> getFilms() {
-        return films;
+        return filteredFilms;
     }
 
     public void onStart() {
@@ -87,7 +88,16 @@ public class Presenter implements Serializable {
     }
 
     public ArrayList<String> getGenres() {
-        return new ArrayList<>(Arrays.asList("Pfukeirf"));
+        ArrayList<String> genres = new ArrayList<>();
+        for(Film film: films){
+            String[] filmGenres = film.getGenres();
+            for (String filmGenre : filmGenres) {
+                if(!genres.contains(filmGenre)){
+                    genres.add(filmGenre);
+                }
+            }
+        }
+        return new ArrayList<>(genres);
     }
 
     public Film getSelectedFilm() {
@@ -103,5 +113,18 @@ public class Presenter implements Serializable {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         fragmentManager.popBackStack();
         showFragment(listFragment);
+    }
+
+    public void selectGenre(String genre) {
+        filteredFilms.clear();
+        for(Film film : films){
+            String[] filmGenres = film.getGenres();
+            for (String filmGenre : filmGenres) {
+                if(filmGenre.equals(genre)){
+                    filteredFilms.add(film);
+                }
+            }
+        }
+        listFragment.initRecyclersView();
     }
 }

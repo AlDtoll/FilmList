@@ -43,8 +43,8 @@ public class ListFragment extends Fragment {
 
     private GenreAdapter.Callback genreCallback = new GenreAdapter.Callback() {
         @Override
-        public void selectGenre(String film) {
-
+        public void selectGenre(String genre) {
+            presenter.selectGenre(genre);
         }
     };
 

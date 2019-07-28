@@ -7,6 +7,10 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:layout_marginStart="@dimen/layout_margin_side"
+        android:layout_marginLeft="@dimen/layout_margin_side"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="@dimen/layout_margin_side"
         android:id="@+id/genreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +39,7 @@
         android:layout_marginStart="@dimen/layout_margin_side"
         android:layout_marginLeft="@dimen/layout_margin_side"
         android:layout_marginTop="@dimen/layout_margin_side"
+        android:layout_marginBottom="@dimen/layout_margin_side"
         android:text="@string/films"
         app:layout_constraintBottom_toTopOf="@id/filmList"
         app:layout_constraintStart_toStartOf="parent"
